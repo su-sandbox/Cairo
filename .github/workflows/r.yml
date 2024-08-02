@@ -29,11 +29,6 @@ jobs:
       - if: runner.os == 'macOS'
         run: |
           curl -L https://github.com/R-macos/XQuartz/releases/download/XQuartz-2.8.1/xquartz-2.8.1.tar.xz | sudo tar fxj - -C / && sudo sh /opt/X11/libexec/postinstall
-          Rscript -e 'source("https://mac.R-project.org/bin/install.R"); install.libs("cairo")'
-          pkg-config --libs cairo
-          echo $PATH
-          echo $PKG_CONFIG_PATH
-          which pkg-config
 
       - uses: s-u/R-actions/pkg-check@master
         with:
