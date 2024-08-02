@@ -29,6 +29,7 @@ jobs:
       - if: runner.os == 'macOS'
         run: |
           curl -L https://github.com/R-macos/XQuartz/releases/download/XQuartz-2.8.1/xquartz-2.8.1.tar.xz | sudo tar fxj - -C / && sudo sh /opt/X11/libexec/postinstall
+          sudo mv /opt/homebrew /opt/broken
           pkg-config --libs cairo
           echo $PATH
           echo $PKG_CONFIG_PATH
