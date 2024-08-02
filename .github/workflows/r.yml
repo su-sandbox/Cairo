@@ -27,7 +27,7 @@ jobs:
 
       # believe it or not, GHA has tons of junk on the VM but not even XQuartz ... wow
       - if: runner.os == 'macOS'
-        run: curl -L https://github.com/R-macos/XQuartz/releases/download/XQuartz-2.8.1/xquartz-2.8.1.tar.xz | sudo tar fxj - -C / && sudo sh /opt/X11/libexec/postinstall && pkg-config cairo
+        run: curl -L https://github.com/R-macos/XQuartz/releases/download/XQuartz-2.8.1/xquartz-2.8.1.tar.xz | sudo tar fxj - -C / && sudo sh /opt/X11/libexec/postinstall && pkg-config --libs cairo
 
       - uses: s-u/R-actions/pkg-check@master
         with:
