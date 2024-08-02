@@ -11,8 +11,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ macos-13, macos-14, ubuntu-22.04, windows-2022 ]
-        r-version: [ release, devel ]
+        # os: [ macos-13, macos-14, ubuntu-22.04, windows-2022 ]
+        # r-version: [ release, devel ]
+        os: [ macos-13, macos-14 ]
+        r-version: [ release ]
 
     steps:
       - uses: actions/checkout@v4
@@ -23,9 +25,13 @@ jobs:
           r-version: ${{ matrix.r-version }}
           tools: base
 
+      # believe it or not, GHA has tons of junk on the VM but not even XQuartz ... wow
+      - if: runner.os == 'macOS'
+        run: curl -L https://github.com/R-macos/XQuartz/releases/download/XQuartz-2.8.1/xquartz-2.8.1.tar.xz | sudo tar fxj - -C / && sudo sh /opt/X11/libexec/postinstall && pkg-config cairo
+
       - uses: s-u/R-actions/pkg-check@master
         with:
           debian-deps: libcairo-dev libxt-dev libjpeg-dev
-          macos-deps: cairo
+          macos-deps: cairo 
           build-script: sh mkdist
           check-flags: --as-cran
