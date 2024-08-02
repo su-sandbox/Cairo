@@ -23,8 +23,9 @@ jobs:
           r-version: ${{ matrix.r-version }}
           tools: base
 
-      - uses: s-u/R-actions/pkg-check@v2
+      - uses: s-u/R-actions/pkg-check@master
         with:
           debian-deps: libcairo-dev libxt-dev libjpeg-dev
           macos-deps: cairo
+          build-script: sh mkdist
           check-flags: --as-cran
